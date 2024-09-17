@@ -22,14 +22,14 @@ export const configureAuth = (app: Express): void => {
 
   app.get(
     "/auth/google",
-    passport.authenticate("google", { scope: ["profile", "email"] })
+    passport.authenticate("google", { scope: ["profile","email"] })
   );
 
   app.get(
     "/auth/google/callback",
     passport.authenticate("google", { failureRedirect: "/login" }),
     (req: Request, res: Response) => {
-      res.status(200).json({ message: "User logged in" });
+      res.status(200);
       res.redirect(process.env.CLIENT_URL as string);
     }
   );
@@ -39,15 +39,14 @@ export const configureAuth = (app: Express): void => {
   });
 
   app.post("/api/logout", (req: Request, res: Response) => {
-    req.logout((err)=>{
-        if(err) res.sendStatus(400);
-        console.log("logout worked");
-        req.session.destroy((err)=>{
-            if(err) res.sendStatus(500);
-        });
-        res.clearCookie("connect.sid");
-        res.sendStatus(200);
-        res.redirect(process.env.CLIENT_URL as string);
+    req.logout((err) => {
+      if (err) return res.sendStatus(400);
+      console.log("logout worked");
+      req.session.destroy((err) => {
+        if (err) return res.sendStatus(500);
       });
+      res.clearCookie("connect.sid");
+      res.redirect(process.env.CLIENT_URL as string);
+    });
   });
 };
