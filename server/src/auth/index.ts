@@ -38,7 +38,7 @@ export const configureAuth = (app: Express): void => {
     res.status(200).json(req.user || { message: "Yeah, no login user" });
   });
 
-  app.post("/api/logout", (req: Request, res: Response) => {
+  app.get("/api/logout", (req: Request, res: Response) => {
     req.logout((err) => {
       if (err) return res.sendStatus(400);
       console.log("logout worked");
