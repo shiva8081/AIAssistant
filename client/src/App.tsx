@@ -1,21 +1,25 @@
-
-import './App.css'
-import Home from './home/Home'
-import { Routes, Route } from 'react-router-dom'
-import Login from './pages/Login'
-import { usecontext } from './context/UserContext'
+import "./App.css";
+import Home from "./home/Home";
+import { Routes, Route, Navigate } from "react-router-dom";
+import Navbar from "./pages/Navbar";
+import LoginHome from "./home/LoginHome";
+import { usecontext } from "./context/UserContext";
 function App() {
-  const {Authuser}=usecontext();
-  console.log(Authuser)
+  const { Authuser } = usecontext();
+  console.log(Authuser);
 
   return (
     <>
+      <Navbar Authuser={Authuser} />
       <Routes>
-        <Route path="/" element={Authuser ? <Home /> : <Login />} />
-        <Route path="/login" element={<Login />} />
+        <Route
+          path="/"
+          element={Authuser ? <Home /> : <Navigate to="/login" />}
+        />
+        <Route path="/login" element={Authuser ? <Navigate to="/" /> : <LoginHome />} />
       </Routes>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

@@ -1,6 +1,6 @@
 import passport from "passport";
 import { Strategy as GoogleStrategy } from "passport-google-oauth20";
-// import { PrismaClient } from "@prisma/client";
+
 import dotenv from "dotenv";
 
 dotenv.config(); // Load environment variables
@@ -18,6 +18,7 @@ passport.use(
     function (_accessToken, _refreshToken, profile, done) {
       try {
         console.log(profile);
+
         done(null, profile);
 
       } catch (error) {

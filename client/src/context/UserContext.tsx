@@ -38,7 +38,12 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
       if (res.status === 200) {
         const data = await res.json();
         console.log(data);
-        setAuthuser(data);
+        if(data&&data.message!="Yeah, no login user"){
+          setAuthuser(data);
+        }else{
+            setAuthuser(null);
+            console.log(data.message);
+        }
         console.log(Authuser);
       }
     } catch (error) {
