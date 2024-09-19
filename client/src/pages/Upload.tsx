@@ -1,6 +1,6 @@
 import { CloudArrowUpIcon } from "@heroicons/react/24/outline";
 import { useState, useRef, useEffect } from "react";
-
+import Pdfview from "./Pdfview";
 const Upload = () => {
   const [pdf, setPdf] = useState<string | null>(null);
   const pdfViewerRef = useRef<HTMLDivElement>(null);
@@ -14,6 +14,7 @@ const Upload = () => {
         reader.readAsDataURL(file);
         reader.onloadend = (e) => {
           setPdf(e.target?.result as string);
+
         };
       } else {
         alert("Please upload a valid PDF file");
@@ -48,20 +49,8 @@ const Upload = () => {
         </label>
         <p className="mt-4 text-sm text-gray-300">Supported file: PDF</p>
       </div>
-      
-      {pdf && (
-        <div ref={pdfViewerRef} className=" h-[calc(100vh-160px)] overflow-auto ">
-          <div className=" inset-0 bg-black bg-opacity-0 flex items-center justify-center">
-            <div className="w-full max-w-4xl bg-white rounded-lg p-4">
-              <iframe
-                src={pdf}
-                title="Uploaded PDF"
-                className="w-full h-[calc(100vh-300px)] border-none"
-              />
-            </div>
-          </div>
-        </div>
-      )}
+    {pdf && <Pdfview pdf={pdf} pdfViewerRef={pdfViewerRef}/>}
+    
     </div> 
   );
 };

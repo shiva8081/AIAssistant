@@ -27,7 +27,7 @@ export const configureAuth = (app: Express): void => {
 
   app.get(
     "/auth/google/callback",
-    passport.authenticate("google", { failureRedirect: "/login" }),
+    passport.authenticate("google", { failureRedirect: process.env.CLIENT_URL }),
     (req: Request, res: Response) => {
       res.status(200);
       res.redirect(process.env.CLIENT_URL as string);

@@ -2,6 +2,7 @@ import passport from "passport";
 import { Strategy as GoogleStrategy } from "passport-google-oauth20";
 
 import dotenv from "dotenv";
+import prisma from "../database";
 
 dotenv.config(); // Load environment variables
 
@@ -15,12 +16,38 @@ passport.use(
       clientSecret: GOOGLE_CLIENT_SECRET,
       callbackURL: "http://localhost:5000/auth/google/callback",
     },
-    function (_accessToken, _refreshToken, profile, done) {
+    async function (_accessToken, _refreshToken, profile, done) {
       try {
-        console.log(profile);
-
-        done(null, profile);
-
+        const GID = profile.id;
+        console.log(GID);
+        const userExist = await prisma.user.findUnique({
+          where: {
+            googleId: GID,
+          },
+        });
+        console.log(userExist);
+        if (userExist) {
+          done(null, userExist);
+        } else {
+          if (profile.emails === undefined || profile.emails[0] === undefined) {
+            return done(null, false);
+          }
+          const user = await prisma.user.create({
+            data: {
+              googleId: profile.id,
+              name: profile.displayName,
+              email: profile.emails[0].value,
+              pictureUrl: profile.photos
+                ? profile.photos[0]
+                  ? profile.photos[0].value
+                  : null
+                : null,
+              authProvider: profile.provider,
+            },
+          });
+          console.log(user);
+          done(null, user);
+        }
       } catch (error) {
 
       }
