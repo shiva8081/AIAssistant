@@ -27,14 +27,10 @@ const Upload = () => {
     }
   };
 
-//   useEffect(() => {
-//     if (pdf && pdfViewerRef.current) {
-//       pdfViewerRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
-//     }
-//   }, [pdf]);
+
 
   return (
-    <>
+    
     <div className="w-full op ">
       <div className="flex flex-col  items-center justify-center h-[160px] border-2 border-dashed border-gray-300 rounded-lg ">
         <label
@@ -55,8 +51,8 @@ const Upload = () => {
       </div>
     
     </div> 
-    {/* {pdf && <Pdfview pdf={pdf} pdfViewerRef={pdfViewerRef}/>} */}
-    </>
+   
+    
   );
 };
 
