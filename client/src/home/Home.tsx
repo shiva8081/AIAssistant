@@ -10,13 +10,13 @@ const Home = () => {
       style={{ backgroundImage: `url(${bgcolor})` }}
     >
       <div className="flex-grow flex flex-col justify-center items-center w-full max-w-4xl mx-auto">
-        {Authuser && Authuser.displayName && (
-          <h1 className="text-4xl font-bold mb-7 px-8 py-4  bg-gradient-to-r from-purple-600 to-pink-600 text-transparent bg-clip-text animate-pulse">
-            Welcome, {Authuser.displayName}!
+        {Authuser && Authuser.name && (
+          <h1 className="text-4xl font-bold mb-7 px-8 py-4 op mt-11 bg-gradient-to-r from-purple-600 to-pink-600 text-transparent bg-clip-text animate-pulse">
+            Welcome, {Authuser.name}!
           </h1>
         )}
 
-        <div className="text-center  bg-black bg-opacity-80 p-8 rounded-3xl max-w-2xl shadow-2xl backdrop-blur-md mb-8">
+        <div className="text-center op mt-8  bg-black bg-opacity-80 p-8 rounded-3xl max-w-2xl shadow-2xl backdrop-blur-md mb-8">
           <h1 className="text-4xl font-extrabold text-white mb-4 leading-tight">
             Chat with any PDF
           </h1>

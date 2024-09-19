@@ -4,6 +4,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import Navbar from "./pages/Navbar";
 import LoginHome from "./home/LoginHome";
 import { usecontext } from "./context/UserContext";
+import PdfChat from "./pages/PdfChat";
 function App() {
   const { Authuser } = usecontext();
   console.log(Authuser);
@@ -16,7 +17,16 @@ function App() {
           path="/"
           element={Authuser ? <Home /> : <Navigate to="/login" />}
         />
-        <Route path="/login" element={Authuser ? <Navigate to="/" /> : <LoginHome />} />
+        <Route
+          path="/login"
+          element={Authuser ? <Navigate to="/" /> : <LoginHome />}
+        />
+        <Route
+          path="/pdfchat"
+          element={Authuser ? <PdfChat /> : <Navigate to="/login" />}
+        />
+
+        <Route path="*" element={<div>404 - Not Found</div>} />
       </Routes>
     </>
   );
