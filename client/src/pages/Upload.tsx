@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 const Upload = () => {
   const navigate = useNavigate();
   const [pdf, setPdf] = useState<string | null>(null);
-  const pdfViewerRef = useRef<HTMLDivElement>(null);
+
 
   const fileobj = ["application/pdf"];
   const handlechange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -16,7 +16,7 @@ const Upload = () => {
         reader.readAsDataURL(file);
         reader.onloadend = (e) => {
           setPdf(e.target?.result as string);
-          navigate("/pdf");
+          navigate("/pdfchat" ,{state:{pdf:e.target?.result as string}});
 
         };
       } else {
@@ -27,11 +27,11 @@ const Upload = () => {
     }
   };
 
-  useEffect(() => {
-    if (pdf && pdfViewerRef.current) {
-      pdfViewerRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  }, [pdf]);
+//   useEffect(() => {
+//     if (pdf && pdfViewerRef.current) {
+//       pdfViewerRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+//     }
+//   }, [pdf]);
 
   return (
     <>
@@ -55,7 +55,7 @@ const Upload = () => {
       </div>
     
     </div> 
-    {pdf && <Pdfview pdf={pdf} pdfViewerRef={pdfViewerRef}/>}
+    {/* {pdf && <Pdfview pdf={pdf} pdfViewerRef={pdfViewerRef}/>} */}
     </>
   );
 };

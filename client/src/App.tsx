@@ -26,7 +26,7 @@ function App() {
           element={Authuser ? <PdfChat /> : <Navigate to="/login" />}
         />
 
-        <Route path="*" element={<div>404 - Not Found</div>} />
+        <Route path="*" element={<Navigate to="/"/>}/>
       </Routes>
     </>
   );
