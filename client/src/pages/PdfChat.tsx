@@ -1,4 +1,5 @@
 import { useLocation } from "react-router-dom";
+import Messages from "./Messages";
 
 const PdfChat = () => {
   const location = useLocation();
@@ -8,7 +9,7 @@ const PdfChat = () => {
 
   return (
     <div className=" mt-[72px] flex  ">
-        {/* left side PDF-viewer */}
+      {/* left side PDF-viewer */}
       <div className=" w-1/2">
         <div className="  h-full  flex items-center justify-center">
           <div className="  h-full w-full  bg-white rounded-lg p-4">
@@ -23,8 +24,8 @@ const PdfChat = () => {
       {/* right side PDF-viewer */}
       <div className=" h-[90vh] relative flex flex-col w-1/2">
         <div className="text-2xl font-bold  ">Chat</div>
-        <div className="flex-grow overflow-y-auto mb-4 bg-gray-100 rounded-lg p-4">
-          {/* Chat messages will go here */}
+        <div className="flex-grow  overflow-y-auto mb-4 bg-gray-100 rounded-lg p-4">
+          <Messages />
         </div>
         <div className="flex items-center">
           <input

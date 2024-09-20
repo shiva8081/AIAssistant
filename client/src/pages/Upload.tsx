@@ -1,6 +1,6 @@
 import { CloudArrowUpIcon } from "@heroicons/react/24/outline";
-import { useState, useRef, useEffect } from "react";
-import Pdfview from "./Pdfview";
+import { useState} from "react";
+
 import { useNavigate } from "react-router-dom";
 const Upload = () => {
   const navigate = useNavigate();
@@ -17,6 +17,7 @@ const Upload = () => {
         reader.onloadend = (e) => {
           setPdf(e.target?.result as string);
           navigate("/pdfchat" ,{state:{pdf:e.target?.result as string}});
+          console.log(pdf)
 
         };
       } else {
@@ -31,7 +32,7 @@ const Upload = () => {
 
   return (
     
-    <div className="w-full op ">
+    <div className="w-full  ">
       <div className="flex flex-col  items-center justify-center h-[160px] border-2 border-dashed border-gray-300 rounded-lg ">
         <label
           htmlFor="file-upload"
