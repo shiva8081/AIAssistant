@@ -28,7 +28,7 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
   const [Authuser, setAuthuser] = useState(null);
   const getuser = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/current_user", {
+      const res = await fetch("http://localhost:5001/api/current_user", {
         method: "GET",
         credentials: "include",
         headers: {
