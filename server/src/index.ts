@@ -5,6 +5,7 @@ import cookieParser from "cookie-parser";
 
 import cors from "cors";
 import { configureAuth } from "./auth/index.ts";
+import { Apicall } from "./api/indexCall.ts";
 
 dotenv.config();
 
@@ -26,6 +27,8 @@ export const createServer = (): Express => {
   });
 
   configureAuth(app);
+  Apicall(app);
+
 
   return app;
 };
