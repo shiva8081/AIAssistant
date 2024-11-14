@@ -9,7 +9,7 @@ const openai = new OpenAI({
   apiKey: process.env.CHAT_GPT_SECRET as string, // Make sure you add your OpenAI API key here
 });
 
- export const AskOpenAI = async (question: string, pdfcontent: string) => {
+export const AskOpenAI = async (question: string, pdfcontent: string) => {
   const message: { role: string; content: string }[] = [
     {
       //The system role is a powerful feature of the ChatGPT API that allows us to set the context and behavior of the AI assistant.
@@ -35,8 +35,14 @@ const openai = new OpenAI({
     });
     console.log(response);
     return response;
-  } catch (error) {
-    console.error("Error in OpenAI API request:", error);
-    return "Sorry, I couldn't process your request.";
+  } catch (error: any) {
+    if (error.status === 429) {
+      console.error("Rate limit exceeded. Please try again later.");
+      return "Rate limit exceeded. Please try again later.";
+    } else {
+      console.error("Error in OpenAI API request:", error);
+      return "Sorry, I couldn't process your request.";
+    }
   }
 };
+

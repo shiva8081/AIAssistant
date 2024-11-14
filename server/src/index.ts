@@ -1,5 +1,6 @@
 import express, { Express, Request, Response } from "express";
 import dotenv from "dotenv";
+import { Apicall1 } from "./api/indexCall1.ts";
 
 import cookieParser from "cookie-parser";
 
@@ -28,6 +29,7 @@ export const createServer = (): Express => {
 
   configureAuth(app);
   Apicall(app);
+  Apicall1(app);
 
 
   return app;
