@@ -1,11 +1,19 @@
-import { useLocation } from "react-router-dom";
+import { usecontext } from "../context/PdfContext";
 import Messages from "./Messages";
+import useSendques from "../hooks/useSendques";
+import { useState } from "react";
 
 const PdfChat = () => {
-  const location = useLocation();
-  const pdf = location.state?.pdf;
-  console.log(location.state);
-  console.log(pdf);
+  const { pdfUrl } = usecontext();
+  const {  SendResponse } = useSendques();
+  const [message, setMessage] = useState("");
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log(message);
+    const response = await SendResponse(message);
+  };
+  // console.log(pdf);
 
   return (
     <div className=" mt-[72px] flex  ">
@@ -14,7 +22,7 @@ const PdfChat = () => {
         <div className="  h-full  flex items-center justify-center">
           <div className="  h-full w-full  bg-white rounded-lg p-4">
             <iframe
-              src={pdf}
+              src={pdfUrl ?? undefined}
               title="Uploaded PDF"
               className="  h-full w-full  border-none"
             />
@@ -27,16 +35,18 @@ const PdfChat = () => {
         <div className="flex-grow  overflow-y-auto mb-4 bg-gray-100 rounded-lg p-4">
           <Messages />
         </div>
-        <div className="flex items-center">
+        <form onSubmit={handleSubmit} className="flex items-center">
           <input
             className="flex-grow p-2 border rounded-l-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             type="text"
             placeholder="Ask a question...?"
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
           />
           <button className="bg-blue-500 text-white px-4 py-2 rounded-r-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
             Send
           </button>
-        </div>
+        </form>
       </div>
     </div>
   );

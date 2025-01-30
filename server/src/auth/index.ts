@@ -17,6 +17,7 @@ export const configureAuth = (app: Express): void => {
       },
     })
   );
+  
   app.use(passport.initialize());
   app.use(passport.session());
 

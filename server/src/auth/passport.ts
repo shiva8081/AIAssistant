@@ -17,6 +17,7 @@ passport.use(
       callbackURL: "http://localhost:5001/auth/google/callback",
     },
     async function (_accessToken, _refreshToken, profile, done) {
+
       try {
         const GID = profile.id;
         console.log(GID);
@@ -48,9 +49,7 @@ passport.use(
           console.log(user);
           done(null, user);
         }
-      } catch (error) {
-
-      }
+      } catch (error) {}
     }
   )
 );
