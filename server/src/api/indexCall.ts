@@ -5,13 +5,13 @@ export const Apicall = async (app: Express) => {
   // Define your POST route to handle requests
   app.post("/ask/gemini", async (req: Request, res: Response) => {
     try {
-      const { pdfContent, question } = req.body;
-      if (!pdfContent || !question) {
+      const { pdfcontent, question } = req.body;
+      if (!pdfcontent || !question) {
         return res
           .status(400)
           .json({ error: "Missing PDF content or question." });
       }
-      const response = await AskGemini(question, pdfContent);
+      const response = await AskGemini(question, pdfcontent);
 
       res.json({ answer: response });
     } catch (error) {
