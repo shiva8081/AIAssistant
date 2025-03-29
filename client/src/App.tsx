@@ -5,6 +5,8 @@ import Navbar from "./pages/Navbar";
 import LoginHome from "./home/LoginHome";
 import { usecontext } from "./context/UserContext";
 import PdfChat from "./pages/PdfChat";
+import TweetGenerator from "./components/TweetGenerator";
+
 function App() {
   const { Authuser } = usecontext();
   console.log(Authuser);
@@ -25,8 +27,12 @@ function App() {
           path="/pdfchat"
           element={Authuser ? <PdfChat /> : <Navigate to="/login" />}
         />
+        <Route
+          path="/tweet-generator"
+          element={Authuser ? <TweetGenerator /> : <Navigate to="/login" />}
+        />
 
-        <Route path="*" element={<Navigate to="/"/>}/>
+        <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </>
   );
