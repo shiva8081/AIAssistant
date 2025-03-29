@@ -3,12 +3,12 @@ import Home from "./home/Home";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Navbar from "./pages/Navbar";
 import LoginHome from "./home/LoginHome";
-import { usecontext } from "./context/UserContext";
+import { useUserContext } from "./context/UserContext";
 import PdfChat from "./pages/PdfChat";
 import TweetGenerator from "./components/TweetGenerator";
 
 function App() {
-  const { Authuser } = usecontext();
+  const { Authuser } = useUserContext();
   console.log(Authuser);
 
   return (

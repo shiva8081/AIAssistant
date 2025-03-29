@@ -1,9 +1,9 @@
 import bgcolor from "../Img/bgcolor.png";
-import { usecontext } from "../context/UserContext";
+import { useUserContext } from "../context/UserContext";
 import Upload from "../pages/Upload";
 
 const Home = () => {
-  const { Authuser } = usecontext();
+  const { Authuser } = useUserContext();
   return (
     <>
       <div className="h-[64px]" /> {/* Spacer for navbar */}

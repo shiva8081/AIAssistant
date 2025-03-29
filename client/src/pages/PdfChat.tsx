@@ -1,14 +1,12 @@
-import { usecontext } from "../context/PdfContext";
+import { usePdfContext } from "../context/PdfContext";
 import Messages from "./Messages";
 import useSendques from "../hooks/useSendques";
 import { useState, useRef, useEffect } from "react";
-import TweetGenerator from "../components/TweetGenerator";
 
 const PdfChat = () => {
-  const { pdfUrl } = usecontext();
+  const { pdfUrl } = usePdfContext();
   const { SendResponse, loading } = useSendques();
   const [message, setMessage] = useState("");
-  const [activeTab, setActiveTab] = useState<"chat" | "tweet">("chat");
   const [chatMessages, setChatMessages] = useState<
     { text: string; sender: "user" | "bot" }[]
   >([]);

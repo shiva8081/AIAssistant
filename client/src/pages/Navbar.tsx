@@ -2,7 +2,10 @@ import Logout from "./Logout";
 import Login from "./Login";
 
 interface NavbarProps {
-  Authuser: any;
+  Authuser: {
+    name?: string;
+    email?: string;
+  } | null;
 }
 
 const Navbar = ({ Authuser }: NavbarProps) => {

@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { usecontext } from "../context/PdfContext";
+import { usePdfContext } from "../context/PdfContext";
 
 const useSendques = () => {
   const [loading, setLoading] = useState(false);
-  const { pdfText } = usecontext();
+  const { pdfText } = usePdfContext();
 
   const SendResponse = async (message: string, previousResponse?: string) => {
     setLoading(true);

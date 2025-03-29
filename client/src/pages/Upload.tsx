@@ -1,13 +1,13 @@
 import { CloudArrowUpIcon } from "@heroicons/react/24/outline";
 import { useNavigate } from "react-router-dom";
-import { usecontext } from "../context/PdfContext";
+import { usePdfContext } from "../context/PdfContext";
 import pdfToText from "react-pdftotext";
 import { useState } from "react";
 import TweetGenerator from "../components/TweetGenerator";
 
 const Upload = () => {
   const navigate = useNavigate();
-  const { setPdfUrl, setPdfText } = usecontext();
+  const { setPdfUrl, setPdfText } = usePdfContext();
   const [activeTab, setActiveTab] = useState<"pdf" | "tweet">("pdf");
   const [loading, setLoading] = useState(false);
 
@@ -74,8 +74,6 @@ const Upload = () => {
 
   return (
     <div className="max-w-4xl mx-auto  p-6">
-
-      
       {/* Tabs */}
       <div className="flex justify-center mb-8 border-b">
         <button

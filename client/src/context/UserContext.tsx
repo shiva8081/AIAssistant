@@ -1,4 +1,4 @@
-import {
+import React, {
   createContext,
   useContext,
   useState,
@@ -6,17 +6,23 @@ import {
   ReactNode,
 } from "react";
 
+interface User {
+  name?: string;
+  email?: string;
+}
+
 //create the context value type
 interface UserContextType {
-  Authuser: any;
+  Authuser: User | null;
+  setAuthuser: (user: User | null) => void;
   getuser: () => void;
 }
 const UserContext = createContext<UserContextType | undefined>(undefined);
 
-export const usecontext = () => {
+export const useUserContext = () => {
   const context = useContext(UserContext);
-  if (!context) {
-    throw new Error("usecontext must be used within a AuthContextProvider");
+  if (context === undefined) {
+    throw new Error("useUserContext must be used within a UserProvider");
   }
   return context;
 };
@@ -24,8 +30,10 @@ export const usecontext = () => {
 interface AuthContextProviderProps {
   children: ReactNode;
 }
-export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
-  const [Authuser, setAuthuser] = useState(null);
+export const UserProvider: React.FC<AuthContextProviderProps> = ({
+  children,
+}) => {
+  const [Authuser, setAuthuser] = useState<User | null>(null);
   const getuser = async () => {
     try {
       const res = await fetch("http://localhost:5001/api/current_user", {
@@ -38,11 +46,11 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
       if (res.status === 200) {
         const data = await res.json();
         console.log(data);
-        if(data&&data.message!="Yeah, no login user"){
+        if (data && data.message != "Yeah, no login user") {
           setAuthuser(data);
-        }else{
-            setAuthuser(null);
-            console.log(data.message);
+        } else {
+          setAuthuser(null);
+          console.log(data.message);
         }
         console.log(Authuser);
       }
@@ -56,7 +64,7 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
   }, []);
 
   return (
-    <UserContext.Provider value={{ Authuser, getuser }}>
+    <UserContext.Provider value={{ Authuser, setAuthuser, getuser }}>
       {children}
     </UserContext.Provider>
   );

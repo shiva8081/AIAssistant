@@ -1,29 +1,32 @@
-import { createContext, useContext,useState,useEffect,ReactNode } from "react";
-
-
+import React, { createContext, useContext, useState } from "react";
 
 // create the context value type
 interface PdfContextType {
-    pdfText:string | null;
-    pdfUrl:string | null;
-    setPdfText:(text:string | null) => void;
-    setPdfUrl:(url:string | null) => void;
-}
-const PdfContext=createContext<PdfContextType | undefined>(undefined);
-export const usecontext=()=>{
-    const context=useContext(PdfContext);
-    if(!context){
-        throw new Error("usecontext must be used within a PdfContextProvider");
-    }
-    return context;
+  pdfUrl: string | null;
+  setPdfUrl: (url: string | null) => void;
+  pdfText: string;
+  setPdfText: (text: string) => void;
 }
 
-interface PdfContextProviderProps{
-    children:ReactNode;
-}
-export const PdfContextProvider=({children}:PdfContextProviderProps)=>{
-    const [pdfText,setPdfText]=useState<string | null>(null);
-    const [pdfUrl,setPdfUrl]=useState<string | null>(null);
-    
-    return <PdfContext.Provider value={{pdfText,pdfUrl,setPdfText,setPdfUrl}}>{children}</PdfContext.Provider>
-}
+const PdfContext = createContext<PdfContextType | undefined>(undefined);
+
+export const PdfProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
+  const [pdfUrl, setPdfUrl] = useState<string | null>(null);
+  const [pdfText, setPdfText] = useState<string>("");
+
+  return (
+    <PdfContext.Provider value={{ pdfUrl, setPdfUrl, pdfText, setPdfText }}>
+      {children}
+    </PdfContext.Provider>
+  );
+};
+
+export const usePdfContext = () => {
+  const context = useContext(PdfContext);
+  if (context === undefined) {
+    throw new Error("usePdfContext must be used within a PdfProvider");
+  }
+  return context;
+};
