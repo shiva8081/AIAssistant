@@ -73,7 +73,9 @@ const Upload = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto mt-10 p-6">
+    <div className="max-w-4xl mx-auto  p-6">
+
+      
       {/* Tabs */}
       <div className="flex justify-center mb-8 border-b">
         <button

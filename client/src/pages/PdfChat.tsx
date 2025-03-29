@@ -28,14 +28,19 @@ const PdfChat = () => {
     // Add user message to state
     setChatMessages((prev) => [...prev, { text: message, sender: "user" }]);
 
-    // Clear input field
-    setMessage("");
+    // Get the previous bot response if it exists
+    const previousResponse = chatMessages
+      .filter((msg) => msg.sender === "bot")
+      .pop()?.text;
 
-    // Send message to backend
-    const response = await SendResponse(message);
+    // Send message to backend with previous response
+    const response = await SendResponse(message, previousResponse);
 
     // Add bot response to state
     setChatMessages((prev) => [...prev, { text: response, sender: "bot" }]);
+
+    // Clear input field
+    setMessage("");
   };
 
   return (
